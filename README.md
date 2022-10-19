@@ -12,7 +12,7 @@ Slides are written in Italian. **English translations**, if available, are in th
 
 Slides are currently published in PDF format to be easily displayed, printed and annotated. I am working to generate the HTML and Markdown versions, to be more web and GitHub-friendly.
 
-*These slides have been developed for the students of the Laboratorio di Basi di Dati course. 
+*These slides have been developed for the students of this course. 
 Since knowledge should be considered everyone's heritage, my material is available to anyone who wants to study the course topics. However, **such material cannot be used, even in part, for other purposes or in other courses, without my explicit permission and without citing the source**.*
 
 ---
