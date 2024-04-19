@@ -1246,8 +1246,9 @@ Nella creazione del database è possibile specificare anche un set di caratteri.
 Per eliminare il database *n* si usa il comando
 
 ```sql
-DROP DATABASE n
+DROP DATABASE [IF EXISTS] n
 ```
+La clausola `IF EXISTS` permette di saltare senza errori questo comando se il database non esiste.   
 
 Per selezionare il database *n* si usa il comando 
 
@@ -1296,7 +1297,7 @@ USE testcorso;
 
 
 
-La creazione di una tabella avviene tramite il comando CREATE TABLE, che ha la seguente sintassi: 
+La creazione di una tabella avviene tramite il comando `CREATE TABLE`, che ha la seguente sintassi: 
 
 ```sql
 CREATE TABLE nome_tabella(colonna,...,colonna, vincolo_tabella,..., vincolo_tabella)
@@ -1317,8 +1318,11 @@ DROP TABLE nome_tabella
 Per rinominare la tabella   *nome\_tabella* in *nuovo\_nome\_tabella* si usa il comando
 
 ```sql
-RENAME nome_tabella TO  nuovo_nome_tabella
-``` 
+RENAME TABLE nome_tabella TO  nuovo_nome_tabella
+```
+
+In MySQL i due comandi `CREATE TABLE` e `DROP TABLE` ammettono rispettivamente le varianti `IF NOT EXISTS` e `IF EXISTS`,
+con la stessa semantica vista per la `CREATE DATABASE`. 
 
 <!------------------- END SLIDE 037 it -------------------------->
 
@@ -1947,7 +1951,7 @@ CHECK (stipendio < (select max(stipendio) from impiegati where mansione ='dirige
 
 CREATE TABLE impiegati (
 mansione char(10),  
-CHECK (mansione in ('dirigente','ingegnerè,'tecnicò,'segretarià))   
+CHECK (mansione in ('dirigente','ingegnere','tecnico','segretaria'))   
 );
 ``` 
 
