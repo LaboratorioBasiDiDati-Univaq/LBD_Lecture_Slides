@@ -5668,7 +5668,7 @@ Con un input normale, avremmo query del tipo
 SELECT * FROM utenti WHERE username ='pinco' AND password ='jd89389erh'      
 ```
 
-Se invece inserissimo come password la stringa `**' OR ''='**` otterremmo la query     
+Se invece inserissimo come password la stringa `' OR ''='` otterremmo la query     
 
 ```sql
 SELECT * FROM utenti WHERE username ='pinco' AND password ='' OR ''=''           
