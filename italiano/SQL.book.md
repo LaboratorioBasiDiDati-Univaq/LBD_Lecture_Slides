@@ -461,7 +461,7 @@ Un dominio è un tipo di dato derivato, basato su uno dei tipi semplici visti fi
 
 La definizione dei domini fa propriamente parte del DDL. 
 
-Non sono supportati in MySQL. 
+*Non sono supportati in MySQL.* 
 
 <!------------------- END SLIDE 012 it -------------------------->
 
@@ -512,7 +512,7 @@ DEFAULT 'disoccupato';
 
 CREATE DOMAIN DominioMansione   
 AS CHAR(10) 
-CHECK (VALUE IN('DIRIGENTE','INGEGNERE','TECNICO','SEGRETARIA')); 
+CHECK (VALUE IN('DIRIGENTE','INGEGNERE','TECNICO','SEGRETARIO')); 
 ``` 
 
 <!------------------- END SLIDE 014 it -------------------------->
