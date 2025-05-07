@@ -140,7 +140,7 @@ http://people.disim.univaq.it/dellapenna
 
     - [7.1. Esempi](#71-esempi)
 
- - [8. SQL Avanzato: Common Table Expressions](#8-sql-avanzato-common-table-expressions)
+ - [8. SQL Avanzato: Query Ricorsive](#8-sql-avanzato-query-ricorsive)
 
     - [8.1. Strutture ricorsive](#81-strutture-ricorsive)
 
@@ -1951,7 +1951,7 @@ CHECK (stipendio < (select max(stipendio) from impiegati where mansione ='dirige
 
 CREATE TABLE impiegati (
 mansione char(10),  
-CHECK (mansione in ('dirigente','ingegnere','tecnico','segretaria'))   
+CHECK (mansione in ('dirigente','ingegnere','tecnico','segretario'))   
 );
 ``` 
 
@@ -2025,7 +2025,8 @@ ALTER TABLE nome_tabella SET CONSTRAINTS (lista_vincoli | ALL) IMMEDIATE | DEFER
 
 
 
-MySQL non dispone del comando `DROP CONSTRAINT`, ma predilige una sintassi specifica per il vincolo da rimuovere. 
+MySQL dispone del comando `DROP CONSTRAINT` (*introdotto partire dalla versione 8.0.19*), 
+ma anche di una sintassi specifica per il vincolo da rimuovere. 
 
 Per rimuovere la chiave primaria della tabella *nome\_tabella* si usa il comando   
 
@@ -2409,7 +2410,7 @@ Tramite gli alias è possibile ridefinire il nome delle colonne estratte, o forn
 
 
 
-
+Tabella **Impiegati**
 
 |**ID**|**Nome**|**Cognome**|**Stipendio**|**Data\_assunzione**|**Ufficio**|**IDreparto**|**IDsuperiore**|**Mansione**|
 |---|---|---|---|---|---|---|---|---|
@@ -2429,6 +2430,7 @@ Tramite gli alias è possibile ridefinire il nome delle colonne estratte, o forn
 
 
 
+Tabella **Reparti**
 
 |**ID**|**Nome**|**Indirizzo**|**Città**|
 |---|---|---|---|
@@ -3358,6 +3360,43 @@ Se la subquery restituisce più di un record, SQL restituisce un errore.
 
 <!------------------- END SLIDE 100 it -------------------------->
 
+<!----------------- BEGIN SLIDE 100b it -------------------------->
+
+#####  Esempi
+
+
+<!----------------- COLUMN 1 -------------------------->
+
+> 100b
+
+
+
+
+```sql
+-- Determinare gli impiegati con lo stipendio più alto
+SELECT cognome 
+FROM impiegati 
+WHERE stipendio = (SELECT MAX(stipendio) FROM impiegati); 
+
+-- Si vogliono elencare tutti gli impiegati che hanno la stessa mansione dell'impiegato Rossi 
+SELECT cognome 
+FROM impiegati 
+WHERE mansione = (SELECT mansione FROM impiegati WHERE cognome = 'Rossi') 
+-- la subquery restituisce come valore "dirigente"; la query esterna determina quindi tutti gli impiegati che sono dirigenti (Rossi incluso).    
+
+-- la stessa interrogazione, però, si può ottenere con una singola query usando opportunamente dei join:  
+SELECT altro.cognome   
+FROM impiegati rossi, impiegati altro 
+WHERE rossi.mansione = altro.mansione AND rossi.cognome = 'Rossi'     
+
+-- Si vogliono elencare tutti gli impiegati che hanno uno stipendio superiore alla media 
+SELECT cognome, stipendio 
+FROM impiegati 
+WHERE stipendio > (SELECT AVG(stipendio) FROM impiegati);  
+``` 
+
+<!------------------- END SLIDE 100b it -------------------------->
+
 <!----------------- BEGIN SLIDE 101 it -------------------------->
 
 ####  Subquery riga
@@ -3388,6 +3427,27 @@ Ad esempio, `(a, b) < (x, y)` equivale a `(a < x) OR ((a = x) AND (b < y))`
 Se la subquery restituisce più di un record, SQL restituisce un errore. 
 
 <!------------------- END SLIDE 101 it -------------------------->
+
+<!----------------- BEGIN SLIDE 101b it -------------------------->
+
+#####  Esempi
+
+
+<!----------------- COLUMN 1 -------------------------->
+
+> 101b
+
+
+
+
+```sql
+-- Elencare gli impiegati con la stessa mansione e stipendio di Rossi 
+SELECT cognome 
+FROM impiegati 
+WHERE (mansione,stipendio) = (SELECT mansione,stipendio FROM impiegati WHERE cognome = 'Rossi');     
+``` 
+
+<!------------------- END SLIDE 101b it -------------------------->
 
 <!----------------- BEGIN SLIDE 102 it -------------------------->
 
@@ -3421,6 +3481,42 @@ SQL esegue il confronto richiesto tra il valore dell'*espressione* e ciascuno de
 
 <!------------------- END SLIDE 102 it -------------------------->
 
+<!----------------- BEGIN SLIDE 105 it -------------------------->
+
+#####  Esempi
+
+
+<!----------------- COLUMN 1 -------------------------->
+
+> 105
+
+
+
+
+```sql
+-- Tutti i dati dei reparti in cui sono stati assunti nuovi impiegati negli ultimi 30 giorni
+SELECT * 
+FROM reparti   
+WHERE ID IN (SELECT IDreparto FROM impiegati WHERE data_assunzione > DATE_SUB(NOW(), INTERVAL 30 DAY))       
+
+-- versione senza subquery (più complessa da interpretare!)          
+SELECT DISTINCT reparti.* 
+FROM reparti JOIN impiegati ON (reparti.ID = impiegati.IDreparto)      
+WHERE impiegati.data_assunzione > DATE_SUB(NOW(), INTERVAL 30 DAY)  
+
+-- Tutti gli impiegati che lavorano in un reparto di Roma
+SELECT * 
+FROM impiegati   
+WHERE impiegati.IDreparto = ANY (SELECT ID FROM reparti WHERE citta='Roma')      
+
+-- Gli impiegati che guadagnano più di ogni collega di Roma            
+SELECT * 
+FROM impiegati 
+WHERE impiegati.stipendio > ALL (SELECT stipendio FROM impiegati JOIN reparti ON (impiegati.IDreparto=reparti.ID) WHERE citta='Roma')     
+``` 
+
+<!------------------- END SLIDE 105 it -------------------------->
+
 <!----------------- BEGIN SLIDE 103 it -------------------------->
 
 ####  Subquery generiche nell'operatore EXISTS
@@ -3443,83 +3539,68 @@ L'epressione è true (false) se la *subquery* (non) restituisce almeno un record
 
 <!------------------- END SLIDE 103 it -------------------------->
 
-<!----------------- BEGIN SLIDE 104 it -------------------------->
+<!----------------- BEGIN SLIDE 105b it -------------------------->
 
-####  Esempi: subquery scalari
+####  Common Table Expressions
 
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 104
+> 105b
+
+
+
+Le Common Table Expression (CTE) sono una caratteristica SQL avanzata, **disponibile in MySQL solo dalla versione 8**, che permette di utilizzare le sotto-query
+in modo più naturale, dando loro un nome e invocandole come una sorta di procedura. In MySQL, le CTE sono disponibili solo dalla versione 8, e possono sostituire le subquery (non correlate con la query principale) in vari contesti.       
+
+Tecnicamente una CTE è una tabella temporanea di dati, costruita da una query e associata a un nome, che esiste nell'ambito di una singola istruzione e a cui è possibile fare riferimento all'interno di tale istruzione, anche più volte e anche in maniera ricorsiva (ma non ci occuperemo qui delle *query ricorsive*). 
+
+Le CTE si dichiarano con la parola chiave WITH, scrivendo
+
+```sql
+WITH nome_1 AS (query_1), nome_2 AS (query_2)
+query_principale
+```
+
+dove nella clausola FROM di *query_principale* si può fare riferimento a *nome_1* e *nome_2* (cioè alle tabelle risultanti da *query_1* e *query_2*) come fossero normali tabelle presenti nel database. MySQL permette anche di riferirsi a una CTE dichiarata in precedenza nella definizione di una CTE successiva, quindi ad esempio *query_2* può usare *nome_1*. E' anche possibile creare CTE *ricorsive*, ma questo aspetto verrà discusso più avanti. 
+
+<!------------------- END SLIDE 105b it -------------------------->
+
+<!----------------- BEGIN SLIDE 105c it -------------------------->
+
+#####  Esempi
+
+
+<!----------------- COLUMN 1 -------------------------->
+
+> 105c
 
 
 
 
 ```sql
--- Determinare gli impiegati con lo stipendio più alto
-SELECT cognome 
-FROM impiegati 
-WHERE stipendio = (SELECT MAX(stipendio) FROM impiegati); 
-
--- Si vogliono elencare tutti gli impiegati che hanno la stessa mansione dell'impiegato Rossi 
-SELECT cognome 
-FROM impiegati 
-WHERE mansione = (SELECT mansione FROM impiegati WHERE cognome = 'Rossi') 
--- la subquery restituisce come valore "dirigente"; la query esterna determina quindi tutti gli impiegati che sono dirigenti (Rossi incluso).    
-
--- la stessa interrogazione, però, si può ottenere con una singola query usando opportunamente dei join:  
-SELECT altro.cognome   
-FROM impiegati rossi, impiegati altro 
-WHERE rossi.mansione = altro.mansione AND rossi.cognome = 'Rossi'     
-
--- Si vogliono elencare tutti gli impiegati che hanno uno stipendio superiore alla media 
-SELECT cognome, stipendio 
-FROM impiegati 
-WHERE stipendio > (SELECT AVG(stipendio) FROM impiegati);  
-``` 
-
-<!------------------- END SLIDE 104 it -------------------------->
-
-<!----------------- BEGIN SLIDE 105 it -------------------------->
-
-####  Esempi: subquery riga e lista
-
-
-<!----------------- COLUMN 1 -------------------------->
-
-> 105
-
-
-
-
-```sql
--- Elencare gli impiegati con la stessa mansione e stipendio di Rossi 
-SELECT cognome 
-FROM impiegati 
-WHERE (mansione,stipendio) = (SELECT mansione,stipendio FROM impiegati WHERE cognome = 'Rossi');     
-
 -- Tutti i dati dei reparti in cui sono stati assunti nuovi impiegati negli ultimi 30 giorni
+WITH 
+ reparti_con_nuove_assunzioni AS 
+  (SELECT IDreparto 
+   FROM impiegati 
+   WHERE data_assunzione > DATE_SUB(NOW(), INTERVAL 30 DAY))
 SELECT * 
 FROM reparti   
-WHERE ID IN (SELECT IDreparto FROM impiegati WHERE data_assunzione > DATE_SUB(NOW(), INTERVAL 30 DAY))       
+WHERE ID IN (SELECT IDreparto FROM reparti_con_nuove_assunzioni)       
 
--- versione senza subquery (più complessa da interpretare!)          
-SELECT DISTINCT reparti.* 
-FROM reparti JOIN impiegati ON (reparti.ID = impiegati.IDreparto)      
-WHERE impiegati.data_assunzione > DATE_SUB(NOW(), INTERVAL 30 DAY)  
+-- Il codice fiscale degli impiegati il cui nome completo contiene la sottostringa "carlo"
+WITH  
+ impiegati_anagrafica AS   
+  (SELECT CONCAT(nome,' ', cognome) AS nome, codice_fiscale   
+   FROM impiegati)
+SELECT codice_fiscale FROM impiegati_anagrafica WHERE nome LIKE '%carlo%'  
 
--- Tutti gli impiegati che lavorano in un reparto di Roma
-SELECT * 
-FROM impiegati   
-WHERE impiegati.IDreparto = ANY (SELECT ID FROM reparti WHERE citta='Roma')      
+-- Si tratta ovviamente di esempi semplici, che potevano essere risolti anche senza CTE!
 
--- Gli impiegati che guadagnano più di ogni college di Roma            
-SELECT * 
-FROM impiegati 
-WHERE impiegati.stipendio > ALL (SELECT stipendio FROM impiegati JOIN reparti ON (impiegati.IDreparto=reparti.ID) WHERE citta='Roma')     
 ``` 
 
-<!------------------- END SLIDE 105 it -------------------------->
+<!------------------- END SLIDE 105c it -------------------------->
 
 <!----------------- BEGIN SLIDE 106 it -------------------------->
 
@@ -4785,17 +4866,12 @@ DELIMITER;
 
 <!----------------- BEGIN SLIDE 143 it -------------------------->
 
-## 8. SQL Avanzato: Common Table Expressions
+## 8. SQL Avanzato: Query Ricorsive
 
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 143
-
-
-
-
-*Realizzare query ricorsive in SQL* 
+> 143 
 
 <!------------------- END SLIDE 143 it -------------------------->
 
@@ -4948,18 +5024,14 @@ CALL hier_traverse(1); -- esempio d'uso
 
 
 
-Una CTE (*Common Table Expression*) è una tabella temporanea, ottenuta come risultato di una query ed utilizzata per eseguire un altro statement SQL     
+Abbiamo già introdotto le CTE come alternativa avanzata alle sotto-query. Le CTE possono però essere anche ricorsive, cioè richiamare se stesse. Ovviamente bisogna fornire un adeguato caso base per la ricorsione e dichiarare la ricorsività all'interprete SQL usando la parila chiave RECURSIVE:
 
 ```sql
-WITH nome_cte as (query_cte) query
+WITH RECURSIVE nome_1 AS (query_1)
+query_principale
 ```
 
-In MySQL, le CTE sono disponibili solo dalla versione 8, e possono sostituire viste o subquery in vari contesti.       
-Le CTE possono però essere anche ricorsive, e in questo caso la query che le definisce può richiamare la CTE stessa (ovviamente bisogna fornire un adeguato caso base per la ricorsone)     
-
-```sql
-WITH RECURSIVE  nome_cte as (query_cte) query
-``` 
+In questo caso, ad esempio *query_1* può usare *nome_1* all'interno della propria definizione (tipicamente nella clausola FROM), in modo da costruire il suo risultato in modo ricorsivo. 
 
 <!------------------- END SLIDE 148 it -------------------------->
 
@@ -4976,15 +5048,7 @@ WITH RECURSIVE  nome_cte as (query_cte) query
 
 
 ```sql
--- query con CTE banale  
-WITH th   
-AS (SELECT id, CONCAT(id,'-',nome) as nome FROM hier)       
-SELECT nome FROM th WHERE id=4    
--- in questo caso era senz'altro più sensato scrivere           
-SELECT CONCAT(id,'-',nome) as nome FROM hier WHERE id=4;      
-
-
--- qui invece risolviamo l'interrogazione proposta nelle slides precedenti           
+-- risolviamo l'interrogazione proposta nelle slides precedenti           
 -- con MOLTO meno codice...      
 WITH RECURSIVE th AS 
 (
