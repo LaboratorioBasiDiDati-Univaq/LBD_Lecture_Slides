@@ -14,10 +14,6 @@ author: Giuseppe Della Penna
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 001
-
-
-
 *Linguaggio Standard, Estensioni di MySQL, Interfacciamento con Java e PHP, Elementi di Sicurezza*
 
 
@@ -50,23 +46,25 @@ http://people.disim.univaq.it/dellapenna
 
     - [2.1. Gestione degli Utenti](#21-gestione-degli-utenti)
 
-    - [2.2. Creazione di Database](#22-creazione-di-database)
+    - [2.2. Gestione dei Ruoli](#22-gestione-dei-ruoli)
 
-    - [2.3. Creazione di Tabelle](#23-creazione-di-tabelle)
+    - [2.3. Creazione di Database](#23-creazione-di-database)
 
-    - [2.4. Gestione dei Permessi](#24-gestione-dei-permessi)
+    - [2.4. Creazione di Tabelle](#24-creazione-di-tabelle)
 
-    - [2.5. Modifica di tabelle](#25-modifica-di-tabelle)
+    - [2.5. Gestione dei Permessi](#25-gestione-dei-permessi)
 
-    - [2.6. Vincoli di integrità](#26-vincoli-di-integrità)
+    - [2.6. Modifica di tabelle](#26-modifica-di-tabelle)
 
-    - [2.7. Chiavi esterne (foreign key)](#27-chiavi-esterne-foreign-key)
+    - [2.7. Vincoli di integrità](#27-vincoli-di-integrità)
 
-    - [2.8. Vincoli CHECK](#28-vincoli-check)
+    - [2.8. Chiavi esterne (foreign key)](#28-chiavi-esterne-foreign-key)
 
-    - [2.9. Valutazione dei vincoli](#29-valutazione-dei-vincoli)
+    - [2.9. Vincoli CHECK](#29-vincoli-check)
 
-    - [2.10. Modificare i vincoli di una tabella](#210-modificare-i-vincoli-di-una-tabella)
+    - [2.10. Valutazione dei vincoli](#210-valutazione-dei-vincoli)
+
+    - [2.11. Modificare i vincoli di una tabella](#211-modificare-i-vincoli-di-una-tabella)
 
  - [3. Data Modification Language (DML)](#3-data-modification-language-dml)
 
@@ -179,11 +177,6 @@ http://people.disim.univaq.it/dellapenna
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 002
-
-
-
-
 *Tipi di dato, operatori e funzioni di sistema* 
 
 <!------------------- END SLIDE 002 it -------------------------->
@@ -194,11 +187,6 @@ http://people.disim.univaq.it/dellapenna
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 003
-
-
-
 
 I tipi di dato in SQL:1999 si suddividono in:   
 
@@ -219,11 +207,6 @@ I tipi di dato predefiniti sono ulteriormente suddivisi in 5 categorie: tipi num
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 004
-
-
-
-
 Rappresentano valori interi e valori decimali in virgola fissa (es. 75, 4.5, -6.2)  
 
 | --- | --- |
@@ -241,11 +224,6 @@ Rappresentano valori interi e valori decimali in virgola fissa (es. 75, 4.5, -6.
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 005
-
-
-
-
 Rappresentano valori reali in virgola mobile (es. 1256e-4).      
 
 | --- | --- |
@@ -261,11 +239,6 @@ Rappresentano valori reali in virgola mobile (es. 1256e-4).
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 006
-
-
-
 
 Questi tipi sono principalmente usati per inserire nella base di dati contenuto non testuale, ad esempio immagini o generici files. La manipolazione di questo tipo di dati non è sempre possibile tramite l'SQL interattivo.  
 
@@ -285,11 +258,6 @@ Inserire binari nelle basi di dati presenta una serie di pericoli riguardanti le
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 007
-
-
-
-
 Sono tipi usati per rappresentare caratteri, stringhe o interi blocchi di testo. È possibile associare ai tipi testo un CHARACTER SET di riferimento e la relativa COLLATION (ordine dei caratteri nel set).  
 
 | --- | --- |
@@ -306,10 +274,6 @@ Sono tipi usati per rappresentare caratteri, stringhe o interi blocchi di testo.
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 008
-
-
-
 Permettono di gestire date e ore. Tipicamente il formato usato per specificare queste due informazioni è quello anglosassone, quindi una data dovrà essere inserita come 'anno-mese-giorno' e un'ora come 'ore:minuti:secondi'. Inoltre, nella maggior parte dei DBMS date e ore sono inserite sotto forma di stringhe di caratteri, per cui vanno racchiuse tra apici.  
 
 | --- | --- |
@@ -325,11 +289,6 @@ Permettono di gestire date e ore. Tipicamente il formato usato per specificare q
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 009
-
-
-
 
 I tipi booleani non sono presenti in tutti i DBMS. Spesso sono sostituiti con un dominio definito dall'utente o con numeri (0/1) o caratteri (y/n)  
 
@@ -381,11 +340,6 @@ in operazioni quali i confronti non siano disponibili (nulli). Le tabelle di ver
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 010
-
-
-
-
 Il valore null è una speciale costante presente un tutti i DBMS, e rappresenta "assenza di informazione". 
 È compatibile con ogni tipo di dato e si usa per dare valore ad attributi non applicabili o dall'effettivo valore non noto. 
 
@@ -397,11 +351,6 @@ Il valore null è una speciale costante presente un tutti i DBMS, e rappresenta 
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 011
-
-
-
 
 MySQL conserva i principali tipi di dato SQL e aggiunge alcune estensioni, definendo range più precisi per lunghezze e precisioni.    
 Esistono anche altri tipi oltre a quelli elencati qui, che sono i più comuni.
@@ -451,11 +400,6 @@ I tipi interi hanno tutti la variante UNSIGNED, con lo stesso numero di bytes ma
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 012
-
-
-
-
 SQL permette di definire dei domini e utilizzarli nella definizione di tabelle. 
 Un dominio è un tipo di dato derivato, basato su uno dei tipi semplici visti finora, cui si possono associare particolari vincoli o informazioni.  
 
@@ -471,11 +415,6 @@ La definizione dei domini fa propriamente parte del DDL.
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 013
-
-
-
 
 ```sql
 CREATE DOMAIN d AS tipo [DEFAULT  valore] [CHECK(vincolo)]   
@@ -495,11 +434,6 @@ definisce il dominio  *d* (il nome deve essere una stringa alfanumerica), basand
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 014
-
-
-
 
 ```sql
 CREATE DOMAIN tipoEta   
@@ -523,11 +457,6 @@ CHECK (VALUE IN('DIRIGENTE','INGEGNERE','TECNICO','SEGRETARIO'));
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 015
-
-
-
 
 Per modificare il valore di `DEFAULT` del dominio  *d* in *valore* si usa il comando
 
@@ -562,10 +491,6 @@ ALTER DOMAIN d ADD CONSTRAINT CHECK(vincolo)
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 016
-
-
-
 Per rimuovere il dominio  *d* di usa il comando
 
 ```sql
@@ -586,11 +511,6 @@ DROP DOMAIN d RESTRICT | CASCADE
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 017
-
-
-
-
 Il linguaggio SQL definisce una serie di operatori e funzioni di base che possono essere usati in diversi comandi,
 ad esempio per creare vincoli `CHECK`, per filtrare i record di una o più tabelle, o per derivare valori dai dati presenti nel database. 
 
@@ -602,11 +522,6 @@ ad esempio per creare vincoli `CHECK`, per filtrare i record di una o più tabel
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 018
-
-
-
 
 SQL mette a disposizione tutte le usuali funzioni aritmetiche, indicate con gli operatori `+`,`-`,`*` e `/`.  
 
@@ -620,11 +535,6 @@ Nel calcolo delle espressioni aritmetiche, il valore nullo viene considerato ugu
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 019
-
-
-
 
 Sebbene non siano fornite in tutte le implementazioni di SQL, le funzioni che seguono sono molto comuni. 
 
@@ -644,11 +554,6 @@ Alcuni DBMS supportano anche funzioni trigonometriche e funzioni per il calcolo 
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 020
-
-
-
 
 MySQL dispone di un set esteso di funzioni scalari: 
 
@@ -722,11 +627,6 @@ MySQL dispone di un set esteso di funzioni scalari:
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 021
-
-
-
-
 Questi operatori si applicano ai tipi carattere.  
 
 - `LENGTH(s)` calcola la lunghezza della stringa *s*.  
@@ -745,11 +645,6 @@ Anche in questo caso, diversi dialetti di SQL potrebbero offrire insiemi di funz
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 022
-
-
-
 
 MySQL dispone di un set esteso di funzioni per le stringhe: 
 
@@ -841,11 +736,6 @@ MySQL dispone di un set esteso di funzioni per le stringhe:
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 023
-
-
-
-
 Le funzioni temporali sono quelle più variabili tra DBMS diversi. Le costanti temporali sono invece di solito ampiamente supportate  
 
 - `DATE(v)`, `TIME(v)`, `TIMESTAMP(v)`  convertono rispettivamente un valore scalare in una data, un tempo, un timestamp.    
@@ -870,11 +760,6 @@ Date e tempi possono anche essere usati in espressioni aritmetiche: in tali espr
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 024
-
-
-
 
 MySQL dispone di un set esteso di funzioni per la manipolazione di date:  
 
@@ -960,11 +845,6 @@ MySQL dispone di un set esteso di funzioni per la manipolazione di date:
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 025
-
-
-
-
 ```sql
 -- per provare queste espressioni in un DBMS, occorre come vedremo selezionarne il valore, scrivendole all'interno di una clausola SELECT
 
@@ -993,11 +873,6 @@ SELECT (DATE_ADD(data, INTERVAL 90 DAY) >= CURRENT_DATE)
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 026
-
-
-
-
 SQL mette a disposizione tutti gli usuali operatori di confronto, cioè maggiore `>`, minore `<`, maggiore o uguale `>=`
  minore o uguale `<=`, uguale `=`, diverso `<>`.               
 
@@ -1019,11 +894,6 @@ Le due espressioni sono vere se, rispettivamente, il valore  *c* è compreso o n
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 027
-
-
-
 
 L'operatore `IN` permette di determinare se un valore si trova in un insieme specificato.  
 
@@ -1050,11 +920,6 @@ in questo caso la lista di valori non è dichiarata esplicitamente, ma viene gen
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 028
-
-
-
-
 L'operatore `LIKE` permette di eseguire alcune semplici operazioni di  *pattern matching*   su valori di tipo stringa.
 
 ```sql
@@ -1079,11 +944,6 @@ Ogni altro carattere nel pattern fa match solo con un carattere identico nella s
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 029
-
-
-
 
 ```sql
 -- qui proviamo l'operatore in una clausola SELECT, ma può essere usato ovunque sia richiesto un valore booleano!
@@ -1116,11 +976,6 @@ SELECT 'ARRIVO' LIKE 'A_R%' -- 1 (vero)
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 030
-
-
-
-
 SQL mette a disposizione i quattro usuali operatori logici, indicati con le parole chiave `AND`, `OR` e `NOT`. Questi operatori possono essere usati per costruire condizioni logiche complesse a partire dai test semplici visti finora. 
 
 <!------------------- END SLIDE 030 it -------------------------->
@@ -1131,11 +986,6 @@ SQL mette a disposizione i quattro usuali operatori logici, indicati con le paro
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 031
-
-
-
 
 In SQL-89, la presenza di valori null rende ogni predicato falso.  
 
@@ -1152,11 +1002,6 @@ Per trattare i valori null, nel caso l'utente non specifichi esplicitamente un p
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 032
-
-
-
-
 *Creazione, modifica ed eliminazione dei metadati* 
 
 <!------------------- END SLIDE 032 it -------------------------->
@@ -1168,11 +1013,6 @@ Per trattare i valori null, nel caso l'utente non specifichi esplicitamente un p
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 033
-
-
-
-
 I DBMS hanno una gestione degli utenti molto raffinata, che permette di assegnare specifici privilegi di accesso a interi database e a tabelle.
 
 Per prima cosa, è necessario creare gli utenti:    
@@ -1182,9 +1022,9 @@ CREATE USER  u IDENTIFIED BY  p
 
 Crea l'utente *u* e gli assegna la password *p*
 
-- In MySQL,   *u* e *p* sono stringhe e andrebbero poste tra virgolette.
+- In MySQL, *u* e *p* sono stringhe e andrebbero poste tra virgolette.
 
-- In MySQL, i nomi di utente devono avere la forma 'utente'@'host', dove host è la macchina dalla quale l'utente può collegarsi al database. Se non lo si specifica (scrivendo 'utente' o 'utente'@'%') tutte le macchine saranno accettabili. Solitamente, è meglio restringere l'accesso agli utenti locali (@'localhost')        
+- In MySQL, i nomi di utente devono avere la forma 'utente'@'host', dove *host* è la macchina dalla quale l'utente può collegarsi al database. Se non lo si specifica (scrivendo 'utente' o 'utente'@'%') tutte le macchine saranno accettabili. Solitamente, è meglio restringere l'accesso agli utenti locali (@'localhost')        
 
 Per eliminare un utente si usa il comando
 
@@ -1200,17 +1040,47 @@ ALTER USER n IDENTIFIED BY p
 
 <!------------------- END SLIDE 033 it -------------------------->
 
-<!----------------- BEGIN SLIDE 034 it -------------------------->
+<!----------------- BEGIN SLIDE 033b it -------------------------->
 
-### 2.2. Creazione di Database
+### 2.2. Gestione dei Ruoli
 
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 034
+L'SQL prevede anche il concetto di *ruolo*, spesso usato nei sistemi di autenticazione per attribuire a un gruppo di utenti gli stessi permessi in base, appunto, al ruolo ricoperto.
+
+Per prima cosa, è necessario creare il ruolo:    
+```sql
+CREATE ROLE r
+```
+Crea il ruolo *r*.
+
+- In MySQL i ruoli sono supportati dalla versione 8. I nomi dei ruoli *possono* avere la forma 'utente'@'host', come i nomi utente, e il default per la parte *host* è sempre '%', che però in questo caso non è una *wildcard*. La parte *host* di nei ruoli non ha lo stesso effetto che nei nomi utente, e *solitamente viene omessa*.
+
+Per eliminare un ruolo si usa il comando
+```sql
+DROP ROLE r    
+```
+
+Per assegnare uno o più ruoli a un utente, si usa una variante del comando `GRANT` (che vedremo più avanti)
+```sql
+GRANT r1, r2, r3 TO u
+```
+Assegna i ruoli *r1*, *r2* e *r3* all'utente *u*.
+
+Per togliere uno o più ruoli da un utente, si usa una variante del comando `REVOKE` (che vedremo più avanti)
+```sql
+REVOKE r1, r2 FROM u
+``` 
+
+<!------------------- END SLIDE 033b it -------------------------->
+
+<!----------------- BEGIN SLIDE 034 it -------------------------->
+
+### 2.3. Creazione di Database
 
 
-
+<!----------------- COLUMN 1 -------------------------->
 
 Un DBMS può contenere tabelle appartenenti a diversi schemi relazionali. Per distinguerle, queste vengono poste in *namespace*  separati.    
 I namespace sono chiamati dallo standard SQL   *schema*, ma spesso è presente anche il più intuitivo sinonimo *database*.
@@ -1227,11 +1097,6 @@ Lo standard per creare schemi consiste nell'utilizzo dell'istruzione SQL `CREATE
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 035
-
-
-
 
 I comandi SQL usati per manipolare gli schemi in MySQL sono i seguenti.  
 
@@ -1270,11 +1135,6 @@ MySQL permette di usare la parola chiave SCHEMA al posto di DATABASE, per essere
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 036
-
-
-
-
 ```sql
 -- iniziamo a creare un database per i nostri esempi...          
 
@@ -1287,15 +1147,10 @@ USE testcorso;
 
 <!----------------- BEGIN SLIDE 037 it -------------------------->
 
-### 2.3. Creazione di Tabelle
+### 2.4. Creazione di Tabelle
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 037
-
-
-
 
 La creazione di una tabella avviene tramite il comando `CREATE TABLE`, che ha la seguente sintassi: 
 
@@ -1333,11 +1188,6 @@ con la stessa semantica vista per la `CREATE DATABASE`.
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 038
-
-
-
-
 Il formato di una specifica di colonna è il seguente:  
 
 ```sql
@@ -1360,11 +1210,6 @@ nome_colonna dominio [DEFAULT valore] [vincolo_colonna ... vincolo_colonna]
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 039
-
-
-
 
 ```sql
 CREATE TABLE impiegati (
@@ -1401,20 +1246,15 @@ CREATE TABLE reparti (
 
 <!----------------- BEGIN SLIDE 040 it -------------------------->
 
-### 2.4. Gestione dei Permessi
+### 2.5. Gestione dei Permessi
 
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 040
-
-
-
-
-Dopo aver creato degli utenti, si possono assegnare loro dei privilegi:   
+Dopo aver creato degli utenti ed eventualmente i ruoli, si possono assegnare loro dei privilegi:   
 
 ```sql
-GRANT privilegi ON elemento TO utente
+GRANT privilegi ON elemento TO utente_o_ruolo
 ```
 
 - *privilegi* è una lista (separata di virgole) di privilegi. 
@@ -1433,11 +1273,11 @@ Si può utilizzare lo speciale privilegio `ALL` per assegnare tutti i privilegi 
 
    - *d*.*t* (la tabella *t* del database *d*)
 
-- L'*utente* a cui si assegnano i privilegi deve essere specificato come richiesto dallo specifico DBMS.
+- L'*utente o ruolo* a cui si assegnano i privilegi deve essere specificato come richiesto dallo specifico DBMS.
 
 Per rimuovere dei privilegi, si può usare il comando    
 ```sql
-REVOKE privilegi ON elemento FROM utente
+REVOKE privilegi ON elemento FROM utente_o_ruolo
 ``` 
 
 <!------------------- END SLIDE 040 it -------------------------->
@@ -1448,11 +1288,6 @@ REVOKE privilegi ON elemento FROM utente
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 041
-
-
-
 
 ```sql
 CREATE USER 'testuser1'@'localhost' IDENTIFIED BY 'testpass1';
@@ -1472,15 +1307,10 @@ GRANT ALL ON testcorso.impiegati TO 'testuser1'@'localhost';
 
 <!----------------- BEGIN SLIDE 042 it -------------------------->
 
-### 2.5. Modifica di tabelle
+### 2.6. Modifica di tabelle
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 042
-
-
-
 
 Per modificare le colonne e i vincoli di una tabella sono disponibili i seguenti comandi.
 
@@ -1517,11 +1347,6 @@ ALTER TABLE nome_tabella ALTER COLUMN nome_colonna DROP DEFAULT
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 043
-
-
-
-
 ```sql
 ALTER TABLE impiegati ADD COLUMN ufficio integer;   
 
@@ -1536,15 +1361,10 @@ ALTER TABLE impiegati ALTER COLUMN ufficio DROP DEFAULT;
 
 <!----------------- BEGIN SLIDE 044 it -------------------------->
 
-### 2.6. Vincoli di integrità
+### 2.7. Vincoli di integrità
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 044
-
-
-
 
 Un vincolo è una regola che specifica delle condizioni sui valori delle colonne in una tabella.   
 
@@ -1575,12 +1395,7 @@ I vincoli non possono contenere condizioni la cui valutazione può dare risultat
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 045
-
-
-
-
- Ogni vincolo ha associato nel DBMS un descrittore costituito da: 
+Ogni vincolo ha associato nel DBMS un descrittore costituito da: 
 
 -  nome (se non specificato è assegnato automaticamente dal sistema) 
 
@@ -1599,11 +1414,6 @@ Specificare un nome per i vincoli è utile per potervisi riferire in seguito (ad
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 046
-
-
-
 
 La specifica delle chiavi si effettua in SQL mediante le parole chiave `UNIQUE` o `PRIMARY KEY`: 
 
@@ -1635,11 +1445,6 @@ dove *lista\_colonne* è una lista, separata da virgole, dei nomi delle colonne 
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 047
-
-
-
-
 Come sappiamo, **tutte le tabelle relazionali dovrebbero avere una chiave primaria**, che ne rende possibile la manipolazione dei singoli record.    
 Senza una chiave primaria, potrebbe essere impossibile identificare un preciso record della tabella, ad esempio per cancellarlo!
 
@@ -1659,11 +1464,6 @@ Molti database, tra cui MySQL, hanno un costrutto speciale che permette di   **g
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 048
-
-
-
-
 Per indicare che un colonna non può assumere valore nullo (che è il default per tutti gli attributi di un record, se non specificato diversamente tramite la parola chiave `DEFAULT` usata nel dominio della colonna o sulla colonna stessa) è sufficiente includere il vincolo      `NOT NULL` nella specifica della colonna. 
 
 Questo rende obbligatorio l'inserimento esplicito di un valore nella colonna per ogni record. 
@@ -1676,11 +1476,6 @@ Questo rende obbligatorio l'inserimento esplicito di un valore nella colonna per
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 049
-
-
-
 
 ```sql
 CREATE TABLE impiegati (
@@ -1710,15 +1505,10 @@ CREATE TABLE film (
 
 <!----------------- BEGIN SLIDE 050 it -------------------------->
 
-### 2.7. Chiavi esterne (foreign key)
+### 2.8. Chiavi esterne (foreign key)
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 050
-
-
-
 
 In uno schema relazionale sono quasi sempre presenti riferimenti tra tabelle: i record di una tabella vengono messi in corrispondenza 
 con i record di un'altra tabella incorporando nei primi la chiave primaria dei secondi.
@@ -1761,11 +1551,6 @@ cioè produca record che non puntano correttamente a corrispondenti record nella
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 051
-
-
-
-
 Il tipo di match è significativo nel caso di chiavi esterne costituite da più di un attributo e in presenza di valori nulli. 
 
 `MATCH SIMPLE`: il vincolo di integrità referenziale è soddisfatto se per ogni record della tabella referente   
@@ -1794,11 +1579,6 @@ Il default è `MATCH SIMPLE`.
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 052
-
-
-
 
 Le clausole opzionali `ON DELETE` e `ON UPDATE` indicano al DBMS cosa fare nella tabella referente nel caso in cui un record 
 cui si fa riferimento nella tabella riferita venga cancellato o modificato            
@@ -1829,11 +1609,6 @@ L'ordine in cui vengono considerate le varie opzioni (nel caso di più riferimen
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 053
-
-
-
 
 ```sql
 CREATE TABLE impiegati (
@@ -1871,9 +1646,6 @@ ALTER TABLE impiegati ADD CONSTRAINT appartenenza FOREIGN KEY (IDreparto) REFERE
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 054
-
-
 ```sql
 CREATE TABLE docente (
   ID int(11) NOT NULL,  
@@ -1903,15 +1675,10 @@ CREATE TABLE relatore (
 
 <!----------------- BEGIN SLIDE 055 it -------------------------->
 
-### 2.8. Vincoli CHECK
+### 2.9. Vincoli CHECK
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 055
-
-
-
 
 Quando si definisce una tabella è possibile aggiungere alla specifica di ciascuna colonna la parola chiave  `CHECK` seguita da una condizione, cioè un predicato o una combinazione booleana di predicati, comprendenti anche sottointerrogazioini che fanno riferimento ad altre tabelle (componente `WHERE` di una query SQL).     
 
@@ -1931,11 +1698,6 @@ In MySQL, i vincoli check devono contenere espressioni semplici, ad esempio non 
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 056
-
-
-
 
 ```sql
 CREATE TABLE impiegati (
@@ -1959,15 +1721,10 @@ CHECK (mansione in ('dirigente','ingegnere','tecnico','segretario'))
 
 <!----------------- BEGIN SLIDE 057 it -------------------------->
 
-### 2.9. Valutazione dei vincoli
+### 2.10. Valutazione dei vincoli
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 057
-
-
-
 
 Nel valutare i vincoli, il DBMS si attiene alle seguenti regole: 
 
@@ -1981,15 +1738,10 @@ Nel valutare i vincoli, il DBMS si attiene alle seguenti regole:
 
 <!----------------- BEGIN SLIDE 058 it -------------------------->
 
-### 2.10. Modificare i vincoli di una tabella
+### 2.11. Modificare i vincoli di una tabella
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 058
-
-
-
 
 Per modificare un vincolo è necessario conoscerne il nome. 
 
@@ -2019,11 +1771,6 @@ ALTER TABLE nome_tabella SET CONSTRAINTS (lista_vincoli | ALL) IMMEDIATE | DEFER
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 059
-
-
-
 
 MySQL dispone del comando `DROP CONSTRAINT` (*introdotto partire dalla versione 8.0.19*), 
 ma anche di una sintassi specifica per il vincolo da rimuovere. 
@@ -2064,11 +1811,6 @@ ALTER TABLE nome_tabella DROP FOREIGN KEY  c
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 060
-
-
-
-
 ```sql
 ALTER TABLE impiegati ADD UNIQUE(nome,cognome);   
 
@@ -2084,11 +1826,6 @@ ALTER TABLE impiegati ADD CONSTRAINT stipok CHECK (stipendio < premio);
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 061
-
-
-
-
 *Inserimento, aggiornamento ed eliminazione dei dati* 
 
 <!------------------- END SLIDE 061 it -------------------------->
@@ -2097,8 +1834,6 @@ ALTER TABLE impiegati ADD CONSTRAINT stipok CHECK (stipendio < premio);
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 062
 
 In SQL esistono tipi di query che permettono di modificare i dati nelle tabelle:   
 
@@ -2120,11 +1855,6 @@ Le query di modifica vengono comunque trattate prima di quelle di selezione, poi
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 063
-
-
-
 
 Le query di inserimento permettono di inserire nuovi record in una tabella.     
 In particolare, per inserire  nuovi record nella tabella  *nome\_tabella* si usano i comandi
@@ -2151,11 +1881,6 @@ I dati da assegnare ai campi dei nuovi record possono essere specificati come
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 064
-
-
-
-
 ```sql
 INSERT INTO reparti(ID,nome) VALUES (0,'Amministrazione')   
 -- inserisce un record nella tabella reparti.
@@ -2178,11 +1903,6 @@ INSERT INTO mansioni SELECT DISTINCT mansione FROM impiegati
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 065
-
-
-
 
 Le query di aggiornamento permettono di variare il contenuto dei record di una tabella del database che corrispondono a un certo criterio  (espresso con una clausola `WHERE`).      
 
@@ -2207,10 +1927,6 @@ UPDATE nome_tabella SET nome_colonna = espressione, ... WHERE  condizione
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 066
-
-
-
 Con una query di cancellazione si possono cancellare da una tabella i record che corrispondono a un certo criterio (espresso con una clausola `WHERE`), o tutti i record.      
 
 In particolare, per cancellare dalla tabella  *nome\_tabella* i record che corrispondono a una *condizione* si usa il comando
@@ -2229,11 +1945,6 @@ Omettendo la  *condizione*, l'intero contenuto della tabella verrà eliminato.
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 067
-
-
-
 
 ```sql
 UPDATE impiegati SET stipendio = stipendio+stipendio*0.1, premio = 1000 WHERE mansione = 'dirigente'   
@@ -2255,11 +1966,6 @@ DELETE FROM impiegati
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 068
-
-
-
-
 *Interrogazioni sui dati* 
 
 <!------------------- END SLIDE 068 it -------------------------->
@@ -2268,9 +1974,6 @@ DELETE FROM impiegati
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 069
-
 
 Le interrogazioni, o query di selezione, sono la funzionalità principale di SQL.   
 
@@ -2294,11 +1997,6 @@ Tramite le interrogazioni è possibile estrarre dati dal database secondo criter
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 070
-
-
-
 
 La sintassi di base di una interrogazione SQL è la seguente:     
 ```sql
@@ -2328,11 +2026,6 @@ Dal punto di vasta del DBMS, la query viene eseguita secondo la seguente procedu
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 071
-
-
-
-
 La clausola `FROM` dichiara le tabelle dalle quali verranno estratti i dati.  
 
 La *lista\_tabelle* ha la forma     
@@ -2356,11 +2049,6 @@ In assenza di direttive specifiche, la query opererà sul prodotto cartesiano de
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 072
-
-
-
-
 La condizione espressa dopo la parola chiave `WHERE` è un'espressione che deve avere valore booleano (true/false/unknown).        
 
 Per la composizione di questa espressione si possono usare tutti gli operatori e le funzioni visti in precedenza.    
@@ -2375,11 +2063,6 @@ I record selezionati dalla query sono tutti e soli quelli per cui la condizione 
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 073
-
-
-
 
 La clausola `SELECT` dichiara le colonne da estrarre da ciascun record selezionato, il loro ordine e il loro nome.   
 
@@ -2405,10 +2088,6 @@ Tramite gli alias è possibile ridefinire il nome delle colonne estratte, o forn
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 074
-
-
 
 Tabella **Impiegati**
 
@@ -2448,11 +2127,6 @@ Tabella **Reparti**
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 075
-
-
-
 
 ```sql
 -- Reperire i cognomi degli impiegati del reparto 2
@@ -2494,9 +2168,6 @@ SELECT nome, IDreparto FROM impiegati WHERE stipendio > 50 AND mansione ='impieg
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 076
-
-
 ```sql
 -- Selezionare l'ID degli impiegati che lavorano nel dipartimento 1 e sono impiegati o dirigenti 
 SELECT ID FROM impiegati WHERE IDreparto=1 AND(mansione = 'impiegato' OR mansione = 'dirigente')  
@@ -2527,9 +2198,6 @@ SELECT nome, cognome FROM impiegati WHERE cognome LIKE 'R%'
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 077
-
-
 ```sql
 -- Trovare gli impiegati che non hanno un superiore
 SELECT cognome FROM impiegati WHERE IDsuperiore IS NULL  
@@ -2557,11 +2225,6 @@ SELECT nome, DATE_FORMAT(data_assunzione,'%d/%m/%Y') data_assunzione, DATE_FORMA
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 078
-
-
-
-
 Può accadere che, in base alle colonne selezionate, una query ritorni più record con lo stesso contenuto. Ovviamente questo non è in generale utile.  
 
 In questo caso è possibile richiedere l'eliminazione dei duplicati tramite la parola chiave    `DISTINCT` inserita nella clausola `SELECT`:    
@@ -2579,11 +2242,6 @@ La parola chiave `DISTINCT` forza l'interrogazione a restituire record distinti,
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 079
-
-
-
 
 ```sql
 -- Determinare tutte le città in cui è presente un reparto
@@ -2605,11 +2263,6 @@ SELECT DISTINCT cognome FROM impiegati WHERE LENGTH(cognome) > 3
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 080
-
-
-
 
 Negli esempi visti finora l'ordine dei record risultato di una interrogazione è determinato dal sistema (dipende dalla strategia usata per eseguire l'interrogazione).      
 
@@ -2638,11 +2291,6 @@ Dal punto di vasta del DBMS, la query con questa nuova clausola viene eseguita s
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 081
-
-
-
-
 La clausola `ORDER BY` permette di specificare uno o più criteri di ordinamento:  
 
 ```sql
@@ -2663,11 +2311,6 @@ In alcuni DBMS è possibile **usare come criteri di ordinamento anche** nomi (al
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 082
-
-
-
 
 ```sql
 -- Elencare lo stipendio, la mansione e il nome di tutti gli impiegati del dipartimento 3, ordinando i risultati in ordine crescente di stipendio 
@@ -2697,11 +2340,6 @@ ORDER BY stipendio_totale ASC;
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 083
-
-
-
-
 Finora le query viste   **hanno operato sul prodotto cartesiano delle tabelle coinvolte**, ma sappiamo dalla teoria relazionale che è possibile effettuare **join** diversi tra tabelle, che restituiscono **sottoinsiemi del prodotto cartesiano**.
 
 In SQL, un join può essere effettuato implicitamente (tramite la clausola `WHERE`) o esplicitamente (tramite l'operatore `JOIN`).
@@ -2718,11 +2356,6 @@ In pratica, la clausola `WHERE` viene usata in questo caso sia per filtrare il s
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 084
-
-
-
 
 ```sql
 -- Determinare il nome del reparto in cui lavora l'impiegato Rossi 
@@ -2754,11 +2387,6 @@ WHERE subordinato.IDsuperiore=capo.ID
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 085
-
-
-
-
 SQL:1999 prevede diversi tipi di operatori di join espliciti.  
 
 In pratica, questi operatori producono nuove tabelle temporanee, e quindi possono essere usati nella clausola `FROM` al posto dei semplici nomi di tabella.    
@@ -2783,11 +2411,6 @@ L'operatore `JOIN` può essere usato per realizzare join tra tabelle altrimenti 
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 086
-
-
-
 
 I join interni sono i più comuni, e restituiscono il sottoinsieme del prodotto cartesiano tra le due tabelle che rispetta certe condizioni.   
 Sono quelli più facilmente riproducibili con il metodo implicito (condizioni `WHERE`), ma realizzarli con l'operatore esplicito presenta vantaggi in termini di leggibilità e, a seconda del DBMS, anche di velocità.
@@ -2826,11 +2449,6 @@ tabella1 [INNER] JOIN tabella2 ON condizione
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 087
-
-
-
-
 Nel normale join tra due tabelle *R* e *S* non si ha traccia dei record di *R* che non corrispondono ad alcun record di *S*. 
 Questo non sempre è quello che si desidera.       
 
@@ -2867,11 +2485,6 @@ La variante OUTER può essere utilizzata anche per il join naturale, escludendo 
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 088
-
-
-
-
 ```sql
 -- Selezionare gli impiegati e la città in cui lavorano. 
 SELECT impiegati.nome, impiegati.cognome, reparti.citta       
@@ -2906,10 +2519,6 @@ SELECT * FROM persona FULL JOIN casa ON (persona.IDcasa = casa.ID)
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 089
-
-
 
 In algebra relazionale, le condizioni sono predicati valutati su singole tuple indipendentemente dalle altre. 
 Spesso è invece necessario estrarre o valutare proprietà che dipendono da insiemi di record.         
@@ -2952,10 +2561,6 @@ In questi casi, la soluzione è l'aggregazione esplicita dei record, come vedrem
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 089b
-
-
-
 Gli operatori aggregati scartano (non usano nei calcoli) i valori null.   
 L'unica eccezione è costituita dalla funzione `COUNT(*)`, che restituisce il conteggio totale dei record indipendentemente dal loro contenuto.      
 Su una tabella vuota tutti gli operatori di gruppo hanno valore null tranne `COUNT`, che vale zero. 
@@ -2968,11 +2573,6 @@ Su una tabella vuota tutti gli operatori di gruppo hanno valore null tranne `COU
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 090
-
-
-
 
 ```sql
 -- Calcolare il numero di valori distinti dell'attributo stipendio fra tutte le righe di impiegato
@@ -3008,11 +2608,6 @@ SELECT MAX(stipendio), AVG(stipendio), MIN(stipendio) FROM impiegati
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 091
-
-
-
 
 Finora abbiamo usato gli operatori aggregati per calcolare funzioni su tutti i record selezionati da una query, raggruppati in un unico "blocco". Spesso è invece necessario       **calcolare funzioni aggregate su sotto-gruppi di record** . 
 
@@ -3050,11 +2645,6 @@ Dal punto di vasta del DBMS, la query con questa nuova clausola viene eseguita s
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 092
-
-
-
-
 La clausola `GROUP BY` permette di definire i criteri di partizionamento dei record in sotto-gruppi, su cui lavoreranno gli operatori aggregati:
 
 ```sql
@@ -3077,11 +2667,6 @@ In SQL:99 è possibile specificare colonne non inserite nella `GROUP BY` ma funz
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 093
-
-
-
 
 ```sql
 -- Calcolare la somma degli stipendi degli impiegati in ciascun reparto 
@@ -3126,11 +2711,6 @@ GROUP BY reparti.nome, mansione
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 094
-
-
-
-
 Come abbiamo visto, la clausola `WHERE` filtra i record prima che vengano raggruppati come richiesto dalla `GROUP BY`. Non è possibile quindi porre condizioni sui valori ottenuti dal raggruppamento stesso, ad esempio per *"fornire la somma degli stipendi degli impiegati in ciascun reparto quando questa supera la soglia X"*
 
 A questo scopo, SQL mette a disposizione una clausola che lavora come la `WHERE`, ma sui valori di operatori aggregati, e permette quindi di specificare condizioni **sui gruppi di record** generati dalla `GROUP BY`: la clausola `HAVING`, che può essere specificata dopo la `GROUP BY`.   
@@ -3163,11 +2743,6 @@ Dal punto di vasta del DBMS, la query con questa nuova clausola viene eseguita s
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 095
-
-
-
-
 La clausola `HAVING` permette di specificare un'espressione di filtro che verrà applicata ai singoli sotto-gruppi generati dalla clausola `GROUP BY`:   
 
 ```sql
@@ -3186,11 +2761,6 @@ Solo i sotto-gruppi per cui l'espressione `HAVING` vale true saranno passati all
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 096
-
-
-
 
 ```sql
 -- Supponiamo di voler raggruppare gli impiegati sulla base del reparto e della mansione; per ogni gruppo si vogliono determinare il nome del reparto e della mansione corrispondenti, quanti impiegati appartengono al gruppo la somma e la media dei relativi stipendi. Siamo interessati solo ai gruppi che contengono almeno due impiegati. 
@@ -3221,11 +2791,6 @@ HAVING AVG(stipendio) > 25
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 097
-
-
-
 
 Molti DBMS, tra cui MySQL, prevedono un'ultima clausola   `LIMIT` utile a limitare il numero di righe restituite da una query di selezione.     
 ```sql
@@ -3263,10 +2828,6 @@ Dal punto di vasta del DBMS, la query con questa nuova clausola viene eseguita s
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 097b
-
-
-
 In MySQL, la clausola `LIMIT` ha la seguente sintassi:     
 
 ```sql
@@ -3285,11 +2846,6 @@ LIMIT [offset,] lunghezza
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 098
-
-
-
 
 ```sql
 -- Determinare l'impiegato con lo stipendio più alto
@@ -3316,11 +2872,6 @@ LIMIT 10
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 099
-
-
-
-
 Una delle ragioni che rendono SQL un linguaggio potente è la possibilità di esprimere query complesse in termini di query più semplici, tramite il meccanismo delle subquery.         
 
 Le clausole `SELECT` e `WHERE` di una query (detta query esterna) possono infatti contenere altre query (dette subquery).            
@@ -3338,11 +2889,6 @@ Una subquery può fare riferimento  **ai campi del record corrente** (cioè quel
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 100
-
-
-
 
 Le **query scalari**, cioè che restuiscono **un solo record costituito da una sola colonna** (anche calcolata), possono essere usate come **argomenti degli operatori di confronto nella clausola `WHERE`**:   
 
@@ -3366,11 +2912,6 @@ Se la subquery restituisce più di un record, SQL restituisce un errore.
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 100b
-
-
-
 
 ```sql
 -- Determinare gli impiegati con lo stipendio più alto
@@ -3404,11 +2945,6 @@ WHERE stipendio > (SELECT AVG(stipendio) FROM impiegati);
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 101
-
-
-
-
 Le **query riga**  (row subquery), cioè che restituiscono     **un solo record composto da più colonne**, possono essere utilizzate nelle clausole `WHERE` **con operatori di confronto** usando una speciale sintassi:   
 
 ```sql
@@ -3435,11 +2971,6 @@ Se la subquery restituisce più di un record, SQL restituisce un errore.
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 101b
-
-
-
-
 ```sql
 -- Elencare gli impiegati con la stessa mansione e stipendio di Rossi 
 SELECT cognome 
@@ -3455,11 +2986,6 @@ WHERE (mansione,stipendio) = (SELECT mansione,stipendio FROM impiegati WHERE cog
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 102
-
-
-
 
 Le **query lista (o query colonna)**, cioè che restuiscono più record costituiti da una sola colonna, possono essere usate 
 
@@ -3487,11 +3013,6 @@ SQL esegue il confronto richiesto tra il valore dell'*espressione* e ciascuno de
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 105
-
-
-
 
 ```sql
 -- Tutti i dati dei reparti in cui sono stati assunti nuovi impiegati negli ultimi 30 giorni
@@ -3524,11 +3045,6 @@ WHERE impiegati.stipendio > ALL (SELECT stipendio FROM impiegati JOIN reparti ON
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 103
-
-
-
-
 Ogni **query generica**  può essere infine utilizzata come subquery utilizzandola come argomento dell'operatore `EXISTS`
 
 ```sql 
@@ -3545,10 +3061,6 @@ L'epressione è true (false) se la *subquery* (non) restituisce almeno un record
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 105b
-
-
 
 Le Common Table Expression (CTE) sono una caratteristica SQL avanzata, **disponibile in MySQL solo dalla versione 8**, che permette di utilizzare le sotto-query
 in modo più naturale, dando loro un nome e invocandole come una sorta di procedura. In MySQL, le CTE sono disponibili solo dalla versione 8, e possono sostituire le subquery (non correlate con la query principale) in vari contesti.       
@@ -3572,11 +3084,6 @@ dove nella clausola FROM di *query_principale* si può fare riferimento a *nome_
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 105c
-
-
-
 
 ```sql
 -- Tutti i dati dei reparti in cui sono stati assunti nuovi impiegati negli ultimi 30 giorni
@@ -3609,11 +3116,6 @@ SELECT codice_fiscale FROM impiegati_anagrafica WHERE nome LIKE '%carlo%'
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 106
-
-
-
-
 In una query nidificata è possibile fare riferimento alle tabelle (o agli alias delle stesse) definite nella clausola `FROM` della query esterna.     
 
 L'uso di alias sulle tabelle in questi casi è sempre consigliabile per evitare ambiguità.     
@@ -3630,11 +3132,6 @@ In questo modo, si possono correlare le due query, cioè usare i valori del reco
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 107
-
-
-
 
 ```sql
 -- Elencare tutti gli impiegati che hanno uno stipendio minore di altri impiegati assunti nella stessa data 
@@ -3671,24 +3168,23 @@ WHERE NOT EXISTS (SELECT * FROM impiegati i2 WHERE i1.data_assunzione=i2.data_as
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 108
-
-
-
-
-SQL permette di effettuare operazioni insiemistiche tra gli insiemi di record restituiti da due query: unione, intersezione, differenza     
+SQL permette di effettuare operazioni insiemistiche tra gli insiemi di record restituiti da due query: unione, differenza, intersezione
 
 ```sql
 query1 UNION query2    
-query1 MINUS query2    
+query1 EXCEPT query2    
 query1 INTERSECT query2
 ```
 
-Perché questo possa avvenire, **le query coinvolte devono presentare lo stesso numero di colonne, con tipi compatibili**   (e a volte lo stesso nome). È possibile porre tra parentesi le definizioni delle due query argomento dell'unione per evitare ambiguità. È possibile inserire una clausola `LIMIT` e/o `ORDER BY` che valga sull'intera unione, ponendole alla fine della query composta e ricordando di mettere ciascuna query tra parentesi.
+*(la differenza è spesso indicata anche con l'operatore `MINUS` come sinonimo di `EXCEPT`)*
 
-MySQL supporta solo le unioni: gli altri tipi di operazione sono ottenibili tramite normali query, con una definizione più complessa.     
-In MySQL, l'unione avrà come nomi di colonna i nomi derivanti dalla  *query1*.   
-Inoltre, per default MySQL effettua una   `UNION DISTINCT`, eliminando le righe duplicate durante l'unione. Se si vuole eliminare questo effetto, si può indicare esplicitamente `UNION ALL`. 
+**Le query coinvolte devono presentare lo stesso numero di colonne, con tipi compatibili**   (e a volte lo stesso nome). 
+
+È possibile porre tra parentesi le definizioni delle due query argomento per evitare ambiguità. È possibile inserire una clausola `LIMIT` e/o `ORDER BY` che valga sul risultato dell'intera operazione, ponendole alla fine della query composta e ricordando di mettere ciascuna query tra parentesi.
+
+Inoltre, tutte le tre operazioni possono essere eseguite come `DISTINCT` oppure `ALL` (ad esempio `UNION DISTINCT`), e il default se non specificato è sempre `DISTINCT`, che elimina le righe duplicate derivanti dall'operazione. Se non si vuole questo effetto, si può indicare esplicitamente `ALL` dopo l'operatore.
+
+MySQL supporta da sempre le unioni: gli altri tipi di operazione erano comunque ottenibili tramite normali query, con una definizione più complessa. *Dalla versione 8.0.31* sono supportate anche `EXCEPT` e `INTERSECT`. In MySQL, il risultato dell'operazione avrà come nomi di colonna i nomi derivanti dalla  *query1*. 
 
 <!------------------- END SLIDE 108 it -------------------------->
 
@@ -3698,11 +3194,6 @@ Inoltre, per default MySQL effettua una   `UNION DISTINCT`, eliminando le righe 
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 109
-
-
-
 
 ```sql
 -- vogliamo estrarre gli impiegati che hanno lo stipendio più alto e quelli che hanno il più basso
@@ -3729,11 +3220,6 @@ UNION
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 110
-
-
-
-
 Le viste sono stored queries, cioè interrogazioni a cui viene assegnato un nome e la cui definizione è immagazzinata nel database. Vengono create con la sintassi che segue:      
 
 ```sql
@@ -3756,11 +3242,6 @@ Per aggiornare la definizione di una vista o eliminarla, sono disponibili i corr
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 111
-
-
-
-
 ```sql
 CREATE VIEW impiegati_anagrafica AS   
 SELECT CONCAT(nome,' ', cognome) AS nome, codice_fiscale   
@@ -3780,11 +3261,6 @@ SELECT * FROM impiegati_anagrafica WHERE nome LIKE '%Carlo%'
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 112
-
-
-
-
 *Programmare procedure e funzioni direttamente del database* 
 
 <!------------------- END SLIDE 112 it -------------------------->
@@ -3793,9 +3269,6 @@ SELECT * FROM impiegati_anagrafica WHERE nome LIKE '%Carlo%'
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 113
-
 
 Procedure e funzioni permettono di scrivere codice per implementare funzionalità e controlli sui dati direttamente nella base di dati. 
 
@@ -3813,8 +3286,6 @@ Ad esempio, grazie all'uso delle procedure è possibile
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 114
 
 Una procedura è un frammento di codice composto da istruzioni SQL dichiarative e procedurali memorizzate nella base di dati. Questo codice può essere attivato richiamandolo da un programma, da un'altra procedura o da un trigger, e può avere parametri di input (argomenti) e output (valori di ritorno).  
 
@@ -3847,11 +3318,6 @@ In MySQL, si usa la sintassi `DELIMITER terminatore`
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 115
-
-
-
-
 Per creare una procedura, si utilizza il seguente comando SQL:     
 
 ```sql
@@ -3883,9 +3349,6 @@ DROP PROCEDURE nome_procedura
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 116
-
 
 Per creare una funzione, si utilizza un comando SQL molto simile:   
 
@@ -3924,11 +3387,6 @@ DROP FUNCTION nome_funzione
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 117
-
-
-
-
 Il corpo di una procedura o funzione è costituito da un **blocco** di istruzioni delimitato da `BEGIN` ed `END`. 
 Ogni blocco può nidificare altri blocchi. Se il blocco è costituito da una singola istruzione, si possono omettere `BEGIN` ed `END`.
 
@@ -3953,11 +3411,6 @@ LEAVE label
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 117b
-
-
-
-
 Un blocco può iniziare con una o più dichiarazioni di  **variabili locali**, che potranno essere poi usate all'interno del codice della procedura stessa. La sintassi della dichiarazione è la seguente:   
 
 ```sql
@@ -3980,11 +3433,6 @@ SET nome_variabile = espressione
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 118
-
-
-
 
 Una procedura può essere chiamata usando la seguente sintassi:      
 
@@ -4015,11 +3463,6 @@ SELECT nome_funzione( [argomento1,...])
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 119
-
-
-
-
 ```sql
 CALL incrementa_stipendi();  
 
@@ -4040,11 +3483,6 @@ SELECT @var;
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 120
-
-
-
-
 Le normali query SQL presenti all'interno del corpo di una procedura vengono eseguite come di consueto.  
 
 Una query può essere presente in una procedura in varie forme:  
@@ -4064,11 +3502,6 @@ Una query può essere presente in una procedura in varie forme:
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 121
-
-
-
-
 Le query di forma generale (quindi non limitate a query scalari o riga), possono essere inserite in una procedura in maniera diretta, come una qualsiasi istruzione. In questo caso la query viene eseguita normalmente.  È possibile anche scrivere procedure il cui corpo è costituito da una singola query.    
 
 **Il risultato dell'ultima query eseguita in questa modalità viene restituito come output della chiamata a procedura**.      
@@ -4085,11 +3518,6 @@ Ovviamente la query può usare al suo interno variabili e parametri della proced
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 122
-
-
-
 
 Le query scalari possono essere usate ovunque il linguaggio procedurale accetti un'espressione che genera un valore.  
 
@@ -4114,11 +3542,6 @@ Ovviamente la query può usare al suo interno variabili e parametri della proced
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 123
-
-
-
-
 Le query riga possono essere invocate, assegnando i valori di tutte le colonne restituite a una serie di variabili, utilizzando la speciale forma        
 
 ```sql
@@ -4139,11 +3562,6 @@ Ovviamente la query può usare al suo interno variabili e parametri della proced
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 124
-
-
-
 
 ```sql
 DELIMITER $$
@@ -4186,12 +3604,6 @@ DELIMITER;
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 125
-
-
-
-
-
 Il primo costrutto condizionale messo a disposizione da SQL è il classico `IF`-`THEN`-`ELSE`:   
 
 ```sql
@@ -4226,11 +3638,6 @@ In entrambi i casi, se nessuna delle `WHEN` si attiva, viene seguito il *corpo\_
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 126
-
-
-
-
 ```sql
 -- livello_stipendiale_minimo con possibilità di specificare un reparto specifico  
 CREATE FUNCTION livello_stipendiale_minimo(IDreparto INTEGER) RETURNS DECIMAL(7,2)    
@@ -4257,11 +3664,6 @@ SELECT livello_stipendiale_minimo(null),livello_stipendiale_minimo(1);
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 127
-
-
-
 
 Ci sono tre istruzioni di loop. Tutte possono essere opzionalmente etichettate con una   *label*:
 
@@ -4306,11 +3708,6 @@ LEAVE label
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 128
-
-
-
-
 Le *conditions* sono segnalazioni di eventi specifici all'interno del corpo delle procedure che richiedono un trattamento speciale. Possono essere viste come le eccezioni dell'SQL, anche se hanno un uso più generale (non segnalano solo condizioni di errore).                          
 
 MySQL dispone di una serie di conditions predefinite. Se necessario, è possibile     **dichiarare le proprie condition**    (in un parallelo con Java, è come se si dichiarasse una classe derivata da Exception) con la sintassi                 
@@ -4343,11 +3740,6 @@ SIGNAL condizione [SET attributo=valore, ...]
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 129
-
-
-
-
 Le conditions devono essere catturate utilizzando degli appositi handler, che possono essere dichiarati in ciascun blocco, 
 subito dopo la dichiarazione di variabili, condizioni e cursori:                                     
 
@@ -4378,12 +3770,6 @@ Dopo l'esecuzione del *corpo\_handler* l'esecuzione
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 130
-
-
-
-
-
 Per le query di forma generale è possibile iterare sui risultati eseguendo operazioni su ciascuna riga restituita utilizzando i      **cursori**. 
 
 Come vedremo meglio più avanti, i cursori sono un meccanismo di adattamento tra la programmazione procedurale (non solo quella di SQL, ma anche PHP, Java, C, ecc.), le cui strutture solitamente non permettono di gestire efficientemente intere tabelle ma solo singoli record, e le tabelle generate della query SQL.   
@@ -4398,11 +3784,6 @@ Un cursore, all'atto pratico, è **un puntatore a uno dei record generati da una
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 130b
-
-
-
 
 Per usare un cursore, bisogna prima di tutto **dichiararlo** e associarlo alla query sui cui risultati dovrà iterare. Le dichiarazioni di cursore possono comparire in ogni blocco, subito dopo quelle delle variabili:     
 
@@ -4443,11 +3824,6 @@ I cursori dichiarati in un blocco (`BEGIN`...`END`) sono chiusi automaticamente 
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 131
-
-
-
-
 Quando un cursore viene spostato oltre l'ultima riga disponibile, SQL genera una condizione  *No Data* (o *Not Found*) che va catturata usando un handler del tipo              
 
 ```sql
@@ -4464,11 +3840,6 @@ Il codice nel   *corpo\_handler* può, ad esempio, impostare una variable che de
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 132
-
-
-
 
 ```sql
 DELIMITER $$
@@ -4525,11 +3896,6 @@ DELIMITER;
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 133
-
-
-
-
 *Incorporare controlli avanzati e modifiche automatiche sui dati direttamente del database* 
 
 <!------------------- END SLIDE 133 it -------------------------->
@@ -4538,10 +3904,6 @@ DELIMITER;
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 134
-
-
 
 In molti DBMS è disponibile un costrutto detto *trigger* che esegue un blocco di codice sul database quando si verifica un *evento*.
 
@@ -4569,11 +3931,6 @@ La sintassi di un trigger, come quella di una procedura, non è completamente st
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 135
-
-
-
 
 Per creare un trigger, in MySQL si usa il seguente comando SQL:     
 
@@ -4613,11 +3970,6 @@ DROP TRIGGER nome_trigger
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 136
-
-
-
 
 All'interno dei trigger di tipo `FOR EACH ROW` è disponibile una speciale sintassi per riferirsi alla riga dati appena 
 inserita/aggiornata/cancellata per la quale il trigger è stato attivato. La variabile riservata `NEW` serve a riferirsi ai nuovi valori delle colonne della riga appena aggiornata/inserita (se il trigger è `AFTER UPDATE` o `AFTER INSERT`) o da aggiornare/inserire (se il trigger è `BEFORE UPDATE` o `BEFORE INSERT`):       
@@ -4666,10 +4018,6 @@ SIGNAL SQLSTATE '45000' SET message_text = 'messaggio di errore'
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 137
-
-
-
 Variabili e loro significato
 
 |---|---|---|
@@ -4701,11 +4049,6 @@ Azioni eseguibili
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 138
-
-
-
 
 ```sql
 DELIMITER $$
@@ -4751,21 +4094,12 @@ DELIMITER;
 
 ## 7. Transazioni
 
-
-<!----------------- COLUMN 1 -------------------------->
-
-> 139 
-
 <!------------------- END SLIDE 139 it -------------------------->
 
 <!----------------- BEGIN SLIDE 140 it -------------------------->
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 140
-
-
 
 In un database le operazioni **sono sempre raggruppate in** ***transazioni***.
 
@@ -4789,9 +4123,6 @@ Le transazioni, in DBMS avanzati come MySQL, hanno una serie di proprietà denom
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 141
-
 
 Per avviare una transazione, si usa il comando   
 
@@ -4834,11 +4165,6 @@ finché la transazione attivata non viene chiusa.
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 142
-
-
-
-
 ```sql
 -- eseguendo questo blocco di istruzioni, il database non verrà modificato!
 START TRANSACTION;
@@ -4868,11 +4194,6 @@ DELIMITER;
 
 ## 8. SQL Avanzato: Query Ricorsive
 
-
-<!----------------- COLUMN 1 -------------------------->
-
-> 143 
-
 <!------------------- END SLIDE 143 it -------------------------->
 
 <!----------------- BEGIN SLIDE 144 it -------------------------->
@@ -4881,11 +4202,6 @@ DELIMITER;
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 144
-
-
-
 
 In molti casi è possibile che un database codifichi delle gerarchie, ad esempio con la tabella che segue   
 
@@ -4912,11 +4228,6 @@ INSERT INTO hier(id, parent, nome) VALUES (1,null,"root"), (2,1,"sub1"), (3,1,"s
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 145
-
-
-
-
 Come è possibile attraversare questa gerarchia, per rispondere ad esempio alla domanda *"dato un ID, il nome dell'elemento corrispondente e di tutti gli elementi che ne discendono"*?
 
 **Sappiamo che SQL non è ricorsivo, quindi in teoria non è possibile scrivere uno statement che richiama se stesso, come faremmo se dovessimo risolvere questa interrogazione con un linguaggio di programmazione**.
@@ -4936,11 +4247,6 @@ Tuttavia, abbiamo due possibili soluzioni
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 146
-
-
-
-
 Si tratta di una soluzione articolata che si basa sull'uso di tabelle temporanee di appoggio
 
 Le tabelle temporanee possono essere create in MySQL come   *temporary tables*    in memoria, per un accesso più rapido, tuttavia hanno delle caratteristiche particolari, e il loro uso richiede un continuo "riversamento di dati", come vedremo.
@@ -4955,11 +4261,6 @@ Il codice che segue risolve la query appena specificata.
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 147
-
-
-
 
 ```sql
 DROP PROCEDURE IF EXISTS hier_traverse;  
@@ -5019,11 +4320,6 @@ CALL hier_traverse(1); -- esempio d'uso
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 148
-
-
-
-
 Abbiamo già introdotto le CTE come alternativa avanzata alle sotto-query. Le CTE possono però essere anche ricorsive, cioè richiamare se stesse. Ovviamente bisogna fornire un adeguato caso base per la ricorsione e dichiarare la ricorsività all'interprete SQL usando la parila chiave RECURSIVE:
 
 ```sql
@@ -5041,11 +4337,6 @@ In questo caso, ad esempio *query_1* può usare *nome_1* all'interno della propr
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 149
-
-
-
 
 ```sql
 -- risolviamo l'interrogazione proposta nelle slides precedenti           
@@ -5071,11 +4362,6 @@ SELECT nome FROM th
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 150
-
-
-
-
 *Interfacciarsi con un DBMS ed eseguire comandi SQL da codice scritto in Java e PHP* 
 
 <!------------------- END SLIDE 150 it -------------------------->
@@ -5086,11 +4372,6 @@ SELECT nome FROM th
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 151
-
-
-
 
 Tipicamente una base di dati sarà utilizzata da una o più applicazioni client, che si interfacceranno ad essa per inserire, modificare ed estrarre informazioni (oltre che, in casi particolari, anche per modificare le struttura della base di dati stessa).
 
@@ -5108,11 +4389,6 @@ Vedremo ora brevemente come ci si interfaccia con i DBMS in PHP e Java.
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 152
-
-
-
 
 Un concetto utile da comprendere, su cui si basano (anche se non esplicitamente) molte delle modalità di accesso ai DBMS è quello di cursore, che abbiamo già introdotto parlando della procedure SQL. 
 
@@ -5132,11 +4408,6 @@ Dopodichè, esistono istruzioni che permettono di *muovere il cursore* avanti e 
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 153
-
-
-
 
 L'accesso ai dati in Java si effettua tramite il JDBC (Java DataBase Connectivity), le cui classi sono contenute nel   **package java.sql** 
 
@@ -5171,11 +4442,6 @@ Tutte le istruzioni JDBC, in caso di errore, sollevano eccezioni derivate da SQL
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 154
-
-
-
 
 Nelle versioni del Connector/J  **precedenti alla 8**   il driver doveva essere caricato esplicitamente facendo riferimento alla classe che lo implementa      
 
@@ -5215,11 +4481,6 @@ con.close();
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 155
-
-
-
-
 Si crea un oggetto  **Statement** sulla connessione, usando il metodo *createStatement*    
 
 ```java
@@ -5257,11 +4518,6 @@ rs.close(); stmt.close();
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 156
-
-
-
-
 Per le query che restuiscono tabelle di risultati, tramite il   **ResultSet** restituito dal metodo *executeQuery* è possibile leggere le colonne di ciascun record restituito da una query di selezione.   
 
 I record devono essere letti uno alla volta: in ogni momento, il *ResultSet* punta (tramite un cursore) a uno dei record restituiti (record corrente). Per spostare il cursore del *ResultSet* al record successivo, si usa il metodo  *next*. Il metodo restituisce false quando i record sono esauriti e viene quindi solitamente utilizzato in un loop while:       
@@ -5286,11 +4542,6 @@ In alternativa è possibile usare i metodi `getX(indice_colonna)` per accedere a
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 157
-
-
-
 
 Tuttavia, quella appena vista non è la modalità consigliata per eseguire una query. Per motivi di efficienza e sicurezza (che discuteremo dopo), è sempre consigliabile usare i  **prepared statements**.
 
@@ -5331,11 +4582,6 @@ ResultSet rs = stmt.executeQuery();
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 158
-
-
-
 
 Si compila un oggetto  **CallableStatement** sulla connessione, usando il metodo  *prepareCall*:     
 
@@ -5385,11 +4631,6 @@ s.getString(2)
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 159
-
-
-
-
 Il linguaggio di scripting PHP è molto diffuso per la programmazione server-side di siti internet. Per questo motivo l'interfacciamento con i DBMS è una sua funzionalità nativa.  
 
 In PHP esistono set di istruzioni differenti per interfacciarsi con tutti i più noti DBMS. Descriveremo qui di seguito una tipica interazione con un DBMS MySQL, limitandoci alle istruzioni necessarie a eseguire delle query. Per gli altri DBMS le istruzioni e le procedure sono molto simili.    
@@ -5417,9 +4658,6 @@ In caso di errore, è possibile leggere il relativo codice e il messaggio testua
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 160
-
 
 Per prima cosa, è necessario connettersi al DBMS e selezionare il database su cui operare. A questo scopo, si crea un oggetto *mysqli*:   
 
@@ -5465,10 +4703,6 @@ $mysqliobj->close()
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 161
-
-
 
 Invece di costruire lo statement ed eseguirlo:   
 
@@ -5516,11 +4750,6 @@ $nome = "pippo"; $stmt->bind_param("s", $nome);
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 162
-
-
-
-
 Per poter interagire con i DBMS in maniera più astratta, similmente a quanto avviene in Java col JDBC, PHP mette a disposizione anche un altro sistema di accesso, l'estensione **PDO**.
 
 Come nel caso di JDBC, anche per PDO è necessario che PHP abbia disponibili i driver per il DBMS utilizzato, ad esempio l'estensione PDO\_MySQL.  
@@ -5535,9 +4764,6 @@ In caso di errore, per default PDO genera eccezioni di tipo    **PDOException**,
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 163
-
 
 Per prima cosa, è necessario connettersi al DBMS e selezionare il database su cui operare. A questo scopo, si crea un oggetto *PDO* passandogli una *connection string*  (simile a quella JDBC) e le credenziali di connessione:   
 
@@ -5584,11 +4810,6 @@ $conn = null
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 164
-
-
-
-
 Invece di costruire lo statement ed eseguirlo:   
 
 ```php 
@@ -5626,11 +4847,6 @@ ora `$stmt` permette di accedere ai risultati della query, come nel caso non-pre
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 165
-
-
-
-
 *Potenziali problemi di sicurezza derivanti dall'interfacciamento tra DBMS e linguaggi di programmazione* 
 
 <!------------------- END SLIDE 165 it -------------------------->
@@ -5641,11 +4857,6 @@ ora `$stmt` permette di accedere ai risultati della query, come nel caso non-pre
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 166
-
-
-
 
 I DBMS sono spesso usati nelle **applicazioni web**, cioè in quelle applicazioni installate su un web server e utilizzate tramite un web browser.
 
@@ -5667,13 +4878,6 @@ Per prima cosa, consideriamo che l'injection può avvenire solo quando   **una q
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 167
-
-
-
-
-
 
 Ecco un esempio di SQL Injection in PHP. Immaginiamo di avere un modulo nel quale l'utente inserisce l'identificativo di documento, ricevendone in risposta il titolo.    
 
@@ -5718,8 +4922,6 @@ SELECT titolo FROM documenti WHERE ID= 2; DROP TABLE documenti
 
 <!----------------- COLUMN 1 -------------------------->
 
-> 167b
-
 Per finire, un esempio classico per un modulo di login nel quale l'utente inserisce unsername e password. La query che verifica se l'utente è presente nel database potrebbe essere (notate l'uso delle virgolette):                                     
 
 ```php
@@ -5750,11 +4952,6 @@ Altri esempi? Guardate su https://owasp.org/www-community/attacks/SQL\_Injection
 
 
 <!----------------- COLUMN 1 -------------------------->
-
-> 168
-
-
-
 
 Come difendersi? 
 
