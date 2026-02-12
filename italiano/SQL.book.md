@@ -1204,6 +1204,30 @@ nome_colonna dominio [DEFAULT valore] [vincolo_colonna ... vincolo_colonna]
 
 <!------------------- END SLIDE 038 it -------------------------->
 
+<!----------------- BEGIN SLIDE 038b it -------------------------->
+
+####  Colonne calcolate
+
+
+<!----------------- COLUMN 1 -------------------------->
+
+E' possibile chiedere al DBMS di *calcolare il valore di alcune colonne* sulla base dei valori inseriti nel resto del record. 
+Una colonna calcolata è utile quando un valore derivato è utilizzato spesso e andrebbe altrimenti ricalcolato continuamente nelle query. 
+In questo caso la sintassi per la colonna cambia:
+
+```sql
+nome_colonna dominio [GENERATED ALWAYS] AS (espressione) [VIRTUAL|STORED] [vincolo_colonna...]  
+```
+
+- *espressione* è un'espressione SQL che calcola un valore compatibile con *dominio*.   
+  In MySQL, l'espressione può far riferimento solo alle altre colonne del record e usare funzioni built-in del DBMS.
+
+- `VIRTUAL` (default) richiede al DBMS di ricalcolare il valore "al volo" ogni volta che viene richiesto, mentre `STORED` crea una colonna vera e propria nella tabella (occupando il relativo spazio) e vi inserisce/aggiorna il valore automaticamente.
+
+- *vincolo_colonna* è la specifica di un vincolo per la colonna. Sulle colonne calcolate sono validi solo i vincoli `UNIQUE`, `PRIMARY KEY` e `NOT NULL`, che vedremo più avanti. 
+
+<!------------------- END SLIDE 038b it -------------------------->
+
 <!----------------- BEGIN SLIDE 039 it -------------------------->
 
 ####  Esempi
@@ -1232,6 +1256,7 @@ CREATE TABLE impiegati (
   data_assunzione date,  
   stipendio decimal(7,2),  
   premio decimal(7,2) DEFAULT 0.00,   
+  stipendio_totale decimal(7,2) AS (stipendio+premio),
   IDreparto integer,    
   IDsuperiore integer   
 );
